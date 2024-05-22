@@ -1,0 +1,30 @@
+@use "mixins/mixins.scss" as *;
+
+@include b(scrollbar) {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  @include e(content) {
+    height: 100%;
+    overflow: auto;
+    @include when(native) {
+      scrollbar-width: none;
+    }
+  }
+
+  @include e(right-bar) {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    top: 2px;
+    width: 4px;
+
+    @include e(bar) {
+      width: 4px;
+      height: 60px;
+      background-color: #ccc;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+  }
+}

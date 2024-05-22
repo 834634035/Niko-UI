@@ -1,0 +1,52 @@
+@use "mixins/mixins.scss" as *;
+@use "common/var.scss" as *;
+
+@include b(link) {
+  position: relative;
+  @include when(underline) {
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+
+  @include when(disabled) {
+    color: #cccccc;
+    cursor: not-allowed;
+  }
+  @include m(success) {
+    color: $color-success;
+    &:hover {
+      color: $color-success;
+    }
+  }
+  @include m(warning) {
+    color: $color-warning;
+    &:hover {
+      color: $color-warning;
+    }
+  }
+  @include m(danger) {
+    color: $color-danger;
+    &:hover {
+      color: $color-danger;
+    }
+  }
+  @include m(info) {
+    color: $color-info;
+    &:hover {
+      color: $color-info;
+    }
+  }
+  @include m(primary) {
+    color: $color-primary;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+  @include m(default) {
+    color: $color-black;
+    &:hover {
+      color: $color-black;
+    }
+  }
+}

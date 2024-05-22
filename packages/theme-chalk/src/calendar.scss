@@ -1,0 +1,70 @@
+@use "mixins/mixins.scss" as *;
+@use "common/var.scss" as *;
+@include b(calendar) {
+  border: 1px solid $color-info;
+  @include e(header) {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+    align-items: center;
+  }
+
+  @include e(title) {
+    font-size: 24px;
+    color: #891010;
+  }
+  @include e(button-group) {
+    button{
+      transform: scale(0.8);
+    }
+  }
+
+  @include e(body) {
+  }
+}
+
+@include b(calendar-table){
+  width: 100%;
+  padding: 10px;
+  table-layout: fixed;
+  th{
+    font-size: 18px;
+    padding: 5px;
+  }
+  td{
+    font-size: 14px;
+    border-bottom: 1px solid $color-info;
+    border-right: 1px solid $color-info;
+
+    @include when(selected){
+      color: #fff;
+      background-color: #891010;
+    }
+  }
+  td.prev,
+  td.next{
+    color: $color-info;
+  }
+  tr{
+    td:first-child {
+      border-left: 1px solid $color-info;
+    }
+
+  }
+  tr:first-child {
+    td{
+      border-top: 1px solid $color-info;
+    }
+  }
+}
+
+
+@include b(calendar-day){
+  padding: 8px;
+  height: 60px;
+  font-size: 16px;
+  &:hover{
+    cursor: pointer;
+    background: $color-info;
+  }
+}

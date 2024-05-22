@@ -1,0 +1,44 @@
+@use "mixins/mixins.scss" as *;
+
+@include b(bar) {
+  @include when(right) {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    top: 2px;
+    width: 4px;
+    .nk-bar__content {
+      width: 4px;
+      height: 98px;
+      background-color: #ccc;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+  }
+
+  @include when(bottom) {
+    position: absolute;
+    right: 2px;
+    left: 2px;
+    bottom: 2px;
+    height: 4px;
+    .nk-bar__content {
+      width: 60px;
+      height: 4px;
+      background-color: #ccc;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    @include when(no-always) {
+      display: none;
+    }
+
+    .is-no-always{
+      // display: none;
+
+    }
+  }
+
+
+  
+}
