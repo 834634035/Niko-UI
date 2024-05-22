@@ -20,7 +20,7 @@
 import { createNamespace } from "@niko/utils/create";
 import { computed, ref, inject, onMounted, watch } from "vue";
 
-import { barProps } from "./bar";
+import { StyleType, barProps } from "./bar";
 import { scrollbarContextKey } from "./constants";
 
 defineOptions({
@@ -50,12 +50,11 @@ const ratioX = computed(() => {
   return ((barboxRefWidth.value - width.value) / width.value) * 100;
 });
 
-type StyleType = {
-  transform: string;
-  height: string;
-  width: string;
-  display: string;
-};
+// 是否显示滚动条
+const alwaysStatus = ref(false);
+// 鼠标当前是否是按下状态
+const mouseDownStatus = ref(false)
+
 const styles = computed(() => {
   const style: StyleType = {
     transform: "",
@@ -71,7 +70,8 @@ const styles = computed(() => {
     style.width = `${width.value}px`;
   } 
 
-  style.display = props.always ? "block" : "none";
+  // 如果always为true，永久显示
+  style.display = (alwaysStatus.value || props.always) ? "block" : "none";
   return style;
 });
 /***
@@ -102,6 +102,8 @@ function handleMousedown(e) {
   document.onselectstart = function () {
     return false;
   };
+
+  mouseDownStatus.value = true
 
   mouseBarboxPosition.downY = e.clientY;
   mouseBarboxPosition.downX = e.clientX;
@@ -256,6 +258,13 @@ function handleMouseup(e) {
   document.removeEventListener("mousemove", mousemove);
   document.removeEventListener("mouseup", handleMouseup);
 
+
+  mouseDownStatus.value = false;
+  if(alwaysStatus.value){
+    alwaysStatus.value = false
+  }
+
+
   if (document.onselectstart !== originalOnSelectStart) {
     document.onselectstart = originalOnSelectStart;
   }
@@ -292,6 +301,20 @@ onMounted(() => {
   height.value = (parentHeight * (parentHeight - 4)) / childrenHeight;
   // 滚动条宽度
   width.value = (parentWidth * (parentWidth - 4)) / childrenWidth;
+
+
+
+  // 鼠标进入时
+  scrollbar?.scrollbarElement.addEventListener('mouseover',()=>{
+    console.log('mouseover')
+    alwaysStatus.value = true
+  })
+
+  scrollbar?.scrollbarElement.addEventListener('mouseleave',()=>{
+    if(!mouseDownStatus.value){
+      alwaysStatus.value = false;
+    }
+  })
 });
 
 watch(

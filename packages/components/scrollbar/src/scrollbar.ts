@@ -1,4 +1,5 @@
 import { ExtractPropTypes, PropType } from "vue";
+import { isNumber } from "@niko/utils/types";
 
 /**
  * height: 滚动条高度
@@ -38,4 +39,15 @@ export const scrollbarProps = {
   },
 };
 
+export const scrollbarEmits = {
+  scroll: ({
+    scrollTop,
+    scrollLeft,
+  }: {
+    scrollTop: number;
+    scrollLeft: number;
+  }) => [scrollTop, scrollLeft].every(isNumber),
+};
+
+export type ScrollbarEmits = typeof scrollbarEmits
 export type scrollbarPropsType = ExtractPropTypes<typeof scrollbarProps>;

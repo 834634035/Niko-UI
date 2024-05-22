@@ -1,10 +1,6 @@
 <template>
   <div ref="scrollbarRef" :class="bem.b()" :style="styles">
-    <div
-      ref="contentRef"
-      :class="classes"
-      @scroll="handleScroll"
-    >
+    <div ref="contentRef" :class="classes" @scroll="handleScroll">
       <component ref="viewRef" :is="tag">
         <slot></slot>
       </component>
@@ -13,14 +9,14 @@
     <template v-if="!native">
       <Bar
         v-if="rightBarShow"
-        :always="alwaysStatus"
+        :always="always"
         type="right"
         :size="minSize"
         :scrollTop="scrollTop"
       ></Bar>
       <Bar
         v-if="bottomBarShow"
-        :always="alwaysStatus"
+        :always="always"
         type="bottom"
         :size="minSize"
         :scrollLeft="scrollLeft"
@@ -30,8 +26,9 @@
 </template>
 <script lang="ts" setup>
 import { createNamespace } from "@niko/utils/create";
-import { computed, ref, watch, provide, reactive, onMounted } from "vue";
-import { scrollbarProps } from "./scrollbar";
+import { isObjects, isNumber } from "@niko/utils/types";
+import { computed, ref, provide, reactive, onMounted } from "vue";
+import { scrollbarProps, scrollbarEmits } from "./scrollbar";
 import Bar from "./bar.vue";
 import { scrollbarContextKey } from "./constants";
 defineOptions({
@@ -40,6 +37,7 @@ defineOptions({
 const bem = createNamespace("scrollbar");
 
 const props = defineProps(scrollbarProps);
+const emit = defineEmits(scrollbarEmits);
 
 const scrollbarRef = ref<HTMLDivElement>();
 const contentRef = ref<HTMLDivElement>();
@@ -85,22 +83,51 @@ onMounted(() => {
     (viewRef.value as unknown as HTMLElement)?.scrollWidth
       ? false
       : true;
-  console.log((viewRef.value as unknown as HTMLElement)?.scrollWidth);
-  console.log((viewRef.value as unknown as HTMLElement)?.clientWidth);
 });
 
 function handleScroll(e) {
-  // console.log(e.target.scrollLeft)
   scrollTop.value = e.target.scrollTop;
+  scrollLeft.value = e.target.scrollLeft;
+
+  emit("scroll", {
+    scrollTop: e.target.scrollTop,
+    scrollLeft: e.target.scrollLeft,
+  });
 }
 
-// 是否总是显示滚动条--状态
-const alwaysStatus = ref(props.always);
+// 函数重载
+function scrollTo(x: number, y: number): void;
+function scrollTo(options: ScrollToOptions): void;
+function scrollTo(arg1: unknown, arg2?: number) {
+  if (isObjects(arg1)) {
+    contentRef.value!.scrollTo(arg1);
+  } else if (isNumber(arg1) && isNumber(arg2)) {
+    contentRef.value!.scrollTo(arg1, arg2);
+  }
+}
 
-function handleMouseover(e) {
-  alwaysStatus.value = true;
+
+function setScrollTop(value:number){
+  if(!isNumber(value)){
+    return 
+  }
+  contentRef.value!.scrollTop = value;
 }
-function handleMouseout(e) {
-  alwaysStatus.value = false;
+
+function setScrollLeft(value:number){
+  if(!isNumber(value)){
+    return 
+  }
+  contentRef.value!.scrollLeft = value;
 }
+
+
+// 暴露出去的方法和属性
+defineExpose({
+  handleScroll,
+  scrollTo,
+  setScrollTop,
+  setScrollLeft,
+  contentRef,
+});
 </script>
