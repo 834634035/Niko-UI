@@ -306,7 +306,6 @@ onMounted(() => {
 
   // 鼠标进入时
   scrollbar?.scrollbarElement.addEventListener('mouseover',()=>{
-    console.log('mouseover')
     alwaysStatus.value = true
   })
 

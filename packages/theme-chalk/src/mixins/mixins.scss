@@ -32,6 +32,14 @@
   }
 }
 
+@mixin be($block, $element) {
+  @at-root {
+    #{& + "-" + $block + $element-separator + $element} {
+      @content;
+    }
+  }
+}
+
 @mixin button-variant($color, $background-color, $border-color) {
   color: $color;
   background-color: $background-color;

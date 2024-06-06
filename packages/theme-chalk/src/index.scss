@@ -1,3 +1,5 @@
+@use './common/transform.scss';
+
 @use './icon.scss';
 @use './tree.scss';
 @use './vl.scss';
@@ -11,4 +13,7 @@
 @use './col.scss';
 @use './link.scss';
 @use './scrollbar.scss';
-@use './bar.scss'
+@use './bar.scss';
+@use './select.scss';
+@use './option.scss';
+@use './popper.scss';

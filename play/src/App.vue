@@ -146,6 +146,9 @@ const close = () => {
   modalShow.value = false;
   console.log("关闭");
 };
+
+const selectVal = ref([]);
+// const selectVal = reactive([]);
 </script>
 
 <template>
@@ -292,16 +295,27 @@ const close = () => {
     <nk-col :span="5">5</nk-col>
   </nk-row> -->
 
-  <nk-link type="danger"> 这是测试链接 </nk-link>
+  <!-- <nk-link type="danger"> 这是测试链接 </nk-link> -->
 
-  <nk-scrollbar height="200">
-    <!-- <div v-for="item in 20" :key="item" style="height:80px;width:1000px; background-color: aqua;">这是测试{{ item }}</div> -->
+  <!-- <nk-scrollbar height="200">
+    <div v-for="item in 20" :key="item" style="height:80px;background-color: aqua;">这是测试{{ item }}</div>
     <div class="scrollbar-flex-content">
       <p v-for="item in 50" :key="item" class="scrollbar-demo-item">
         {{ item }}
       </p>
     </div>
-  </nk-scrollbar>
+  </nk-scrollbar> -->
+
+  值：{{ selectVal }}
+  <nk-select style="width: 240px" v-model="selectVal" multiple>
+    <nk-option
+      :label="'选项' + item"
+      :value="item.toString()"
+      v-for="item in 10"
+      :key="item"
+      >选项{{ item }}</nk-option
+    >
+  </nk-select>
 </template>
 <style scoped>
 .scrollbar-flex-content {

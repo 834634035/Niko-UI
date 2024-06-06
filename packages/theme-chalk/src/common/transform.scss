@@ -1,0 +1,19 @@
+@use "./var.scss" as *;
+@use "../mixins/config.scss" as *;
+
+.#{$namespace}-popper-enter-active,
+.#{$namespace}-popper-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: transform $transition-popper-duration
+      cubic-bezier(0.23, 1, 0.32, 1),
+    opacity $transition-popper-duration cubic-bezier(0.23, 1, 0.32, 1);
+
+  transform-origin: center 0%;
+}
+
+.#{$namespace}-popper-enter-from,
+.#{$namespace}-popper-leave-active {
+  opacity: 0;
+  transform: scaleY(0);
+}

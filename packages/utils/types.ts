@@ -29,3 +29,9 @@ export const isObjects = (val: any): val is Object =>
   !Array.isArray(val) &&
   !isFunction(val) &&
   !isNull(val);
+
+export const isElement = (e: unknown): e is Element => {
+  // 排除node环境
+  if (typeof Element === "undefined") return false;
+  return e instanceof Element;
+};

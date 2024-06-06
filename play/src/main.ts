@@ -16,6 +16,9 @@ import Row from "@niko/components/row/index";
 import Col from "@niko/components/col/index";
 import Link from "@niko/components/link/index";
 import Scrollbar from "@niko/components/scrollbar/index";
+import Select from "@niko/components/select/index";
+import Option from "@niko/components/option/index";
+import Popper from "@niko/components/popper/index";
 
 const app = createApp(App);
 const plugins = [
@@ -32,7 +35,10 @@ const plugins = [
   Row,
   Col,
   Link,
-  Scrollbar
+  Scrollbar,
+  Select,
+  Option,
+  Popper
 ];
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用
