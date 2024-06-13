@@ -307,7 +307,7 @@ const selectVal = ref([]);
   </nk-scrollbar> -->
 
   值：{{ selectVal }}
-  <nk-select style="width: 240px" v-model="selectVal" multiple>
+  <nk-select style="width: 240px" v-model="selectVal" multiple clearable>
     <nk-option
       :label="'选项' + item"
       :value="item.toString()"

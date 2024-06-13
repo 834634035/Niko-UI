@@ -4,6 +4,8 @@
     :class="[bem.b(), bem.is('focused', isFocused)]"
     v-click-outside:[popperRef]="handleClickOutside"
     @click="handleClick"
+    @mouseenter="isMouseEnter = true"
+    @mouseleave="isMouseEnter = false"
   >
     <div :class="[bem.e('content')]">
       <div :class="bem.be('input', 'wrapper')"></div>
@@ -12,11 +14,17 @@
         <span v-if="!multiple && optionsArray.length === 1">
           {{ optionsArray[0] }}
         </span>
-        <div v-if="multiple && optionsArray.length" :class="[bem.e('selection')]">
-
-          <div :class="[bem.e('selected-item')]" v-for="(item,i) in optionsArray" :key="i">
+        <div
+          v-if="multiple && optionsArray.length"
+          :class="[bem.e('selection')]"
+        >
+          <div
+            :class="[bem.e('selected-item')]"
+            v-for="(item, i) in optionsArray"
+            :key="i"
+          >
             <span>{{ item }}</span>
-            <nk-icon :color="'#a8abb2'" :size="14">
+            <nk-icon :color="'#a8abb2'" :size="14" @click.stop="remove(i)">
               <X></X>
             </nk-icon>
           </div>
@@ -24,7 +32,15 @@
       </div>
     </div>
     <div :class="[bem.e('icon'), bem.is('reverse', isFocused)]">
-      <nk-icon :color="'#a8abb2'" :size="14">
+      <nk-icon
+        :color="'#a8abb2'"
+        :size="14"
+        @click.stop="removeAll"
+        v-if="clearableShow"
+      >
+        <X></X>
+      </nk-icon>
+      <nk-icon :color="'#a8abb2'" :size="14" v-else>
         <ArrowDown></ArrowDown>
       </nk-icon>
     </div>
@@ -115,6 +131,12 @@ watch(
   }
 );
 
+const isMouseEnter = ref(false);
+// 是否显示清除按钮
+const clearableShow = computed(() => {
+  return props.clearable && optionsArray.length && isMouseEnter.value;
+});
+
 // dom加载后，把父元素注入
 onMounted(() => {});
 
@@ -150,8 +172,37 @@ function handleClick() {
   isFocused.value = !isFocused.value;
 }
 
+// 删除某一项
+function remove(i) {
+  optionsArray.splice(i, 1);
+  modelValue.splice(i, 1);
+  setModelValue(modelValue);
+}
+
+// 清除所有值
+function removeAll() {
+  if (props.multiple) {
+    modelValue.length = 0;
+    optionsArray.length = 0;
+    setModelValue(modelValue);
+  } else {
+    setModelValue("");
+  }
+  isFocused.value = false;
+}
+
 function setModelValue(value) {
-  emit("update:modelValue", value);
+  // 如果是多选，必须是数组，且数组长度大于0，则更新modelValue
+  if (props.multiple) {
+    if (Array.isArray(value)) {
+      console.log("本次赋值的value", value);
+      emit("update:modelValue", value);
+    }
+  } else {
+    if (value !== undefined && value !== null) {
+      emit("update:modelValue", value);
+    }
+  }
 }
 
 function handleClickOutside() {
