@@ -1,0 +1,55 @@
+@use "mixins/mixins.scss" as *;
+@use "common/var.scss" as *;
+
+@include b(inputNumber) {
+  width: 150px;
+  display: flex;
+  position: relative;
+  &:hover {
+    .#{$namespace}-input {
+      &__inner {
+        border: 1px solid $color-primary;
+      }
+    }
+  }
+
+  @include e(button) {
+    position: absolute;
+    z-index: 1;
+    user-select: none;
+    width: 30px;
+    top: 1px;
+    bottom: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $bg-fill-hover;
+    color: $font-color-show;
+    cursor: pointer;
+    @include when(disabled) {
+      cursor: not-allowed;
+      color: $disabled-text-color;
+    }
+  }
+  @include e(sub) {
+    left: 1px;
+    border-radius: $borderRadius 0 0 $borderRadius;
+    box-sizing: border-box;
+    border-right: 1px solid #ccc;
+
+  }
+
+  @include e(add) {
+    right: 1px;
+    border-radius: 0 $borderRadius $borderRadius 0;
+    box-sizing: border-box;
+    border-left: 1px solid #ccc;
+
+  }
+
+  @include b(input) {
+    @include e(inner) {
+      text-align: center;
+    }
+  }
+}

@@ -19,6 +19,7 @@ import Scrollbar from "@niko/components/scrollbar/index";
 import Select from "@niko/components/select/index";
 import Option from "@niko/components/option/index";
 import Popper from "@niko/components/popper/index";
+import InputNumber from "@niko/components/inputNumber/index";
 
 const app = createApp(App);
 const plugins = [
@@ -38,7 +39,8 @@ const plugins = [
   Scrollbar,
   Select,
   Option,
-  Popper
+  Popper,
+  InputNumber
 ];
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用

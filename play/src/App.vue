@@ -149,6 +149,8 @@ const close = () => {
 
 const selectVal = ref([]);
 // const selectVal = reactive([]);
+
+const inputNumberValue = ref<Number>(0);
 </script>
 
 <template>
@@ -205,7 +207,6 @@ const selectVal = ref([]);
     :placeholder="'请输入'"
     @blur="handleBlur"
     @focus="handleFocus"
-    :show-password="true"
     :clearable="true"
   >
     <template #prepend> 前置 </template>
@@ -306,7 +307,7 @@ const selectVal = ref([]);
     </div>
   </nk-scrollbar> -->
 
-  值：{{ selectVal }}
+  <!-- 值：{{ selectVal }}
   <nk-select style="width: 240px" v-model="selectVal" multiple clearable>
     <nk-option
       :label="'选项' + item"
@@ -315,7 +316,16 @@ const selectVal = ref([]);
       :key="item"
       >选项{{ item }}</nk-option
     >
-  </nk-select>
+  </nk-select> -->
+  值：{{ inputNumberValue }}
+  <nk-inputNumber
+    v-model="inputNumberValue"
+    :min="0"
+    :max="10"
+    :step="2"
+    @change="(e) => console.log(e)"
+  >
+  </nk-inputNumber>
 </template>
 <style scoped>
 .scrollbar-flex-content {

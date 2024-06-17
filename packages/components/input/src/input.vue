@@ -12,7 +12,7 @@
         <input
           :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
           v-bind="attrs"
-          :class="[bem.e('inner')]"
+          :class="[bem.e('inner'), bem.is('focus', focusValue)]"
           ref="input"
           :placeholder="placeholder"
           @input="handleInput"
@@ -66,6 +66,8 @@ const emit = defineEmits(inputEmits);
 const attrs = useAttrs();
 
 const slots = useSlots();
+// 焦点状态
+const focusValue = ref(false);
 
 watch(
   () => props.modelValue,
@@ -141,10 +143,13 @@ function handleChange(e: Event) {
 
 function handleBlur(e: FocusEvent) {
   formItemContext && formItemContext?.validate("blur").catch((err) => {});
+  focusValue.value = false;
+
   emit("blur", e);
 }
 
 function handleFocus(e: FocusEvent) {
+  focusValue.value = true;
   emit("focus", e);
 }
 </script>
