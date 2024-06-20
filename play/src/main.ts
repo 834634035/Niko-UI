@@ -20,6 +20,7 @@ import Select from "@niko/components/select/index";
 import Option from "@niko/components/option/index";
 import Popper from "@niko/components/popper/index";
 import InputNumber from "@niko/components/inputNumber/index";
+import { Radio, RadioGroup } from "@niko/components/radio/index";
 
 const app = createApp(App);
 const plugins = [
@@ -40,7 +41,9 @@ const plugins = [
   Select,
   Option,
   Popper,
-  InputNumber
+  InputNumber,
+  Radio,
+  RadioGroup
 ];
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用

@@ -151,6 +151,11 @@ const selectVal = ref([]);
 // const selectVal = reactive([]);
 
 const inputNumberValue = ref<Number>(0);
+
+const radioValue = ref<boolean>(true);
+const changeRadioValue = (val: string | number | boolean) => {
+  console.log("变化了", val);
+};
 </script>
 
 <template>
@@ -317,7 +322,7 @@ const inputNumberValue = ref<Number>(0);
       >选项{{ item }}</nk-option
     >
   </nk-select> -->
-  值：{{ inputNumberValue }}
+  <!-- 值：{{ inputNumberValue }}
   <nk-inputNumber
     v-model="inputNumberValue"
     :min="0"
@@ -325,7 +330,13 @@ const inputNumberValue = ref<Number>(0);
     :step="2"
     @change="(e) => console.log(e)"
   >
-  </nk-inputNumber>
+  </nk-inputNumber> -->
+
+  值为{{ radioValue }}
+  <nk-radio-group v-model="radioValue" @change="changeRadioValue">
+    <nk-radio :value="true">111111111 </nk-radio>
+    <nk-radio :value="false">2222222222 </nk-radio>
+  </nk-radio-group>
 </template>
 <style scoped>
 .scrollbar-flex-content {
