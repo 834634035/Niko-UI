@@ -21,6 +21,8 @@ import Option from "@niko/components/option/index";
 import Popper from "@niko/components/popper/index";
 import InputNumber from "@niko/components/inputNumber/index";
 import { Radio, RadioGroup } from "@niko/components/radio/index";
+import Rate from "@niko/components/rate/index";
+
 
 const app = createApp(App);
 const plugins = [
@@ -43,7 +45,8 @@ const plugins = [
   Popper,
   InputNumber,
   Radio,
-  RadioGroup
+  RadioGroup,
+  Rate
 ];
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用

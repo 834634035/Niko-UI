@@ -156,6 +156,15 @@ const radioValue = ref<boolean>(true);
 const changeRadioValue = (val: string | number | boolean) => {
   console.log("变化了", val);
 };
+
+
+
+const rateValue = ref(1)
+const rateRef = ref()
+const resetRateValue = () => {
+  console.log(rateRef)
+  rateRef.value?.resetCurrentValue();
+}
 </script>
 
 <template>
@@ -180,7 +189,7 @@ const changeRadioValue = (val: string | number | boolean) => {
       {{ node.key }}
       {{ node.label }}
     </template>
-  </nk-tree> -->
+</nk-tree> -->
 
   <!-- <nk-checkbox
     v-model="check"
@@ -275,15 +284,8 @@ const changeRadioValue = (val: string | number | boolean) => {
   </nk-calendar> -->
 
   <!-- <nk-button @click="modalShow = true">展开</nk-button> -->
-  <nk-modal
-    v-model="modalShow"
-    :modal="false"
-    width="1000"
-    :close-on-click-modal="false"
-    title="这是标题"
-    @close="close"
-    :show-close="false"
-  >
+  <nk-modal v-model="modalShow" :modal="false" width="1000" :close-on-click-modal="false" title="这是标题" @close="close"
+    :show-close="false">
     哈哈哈哈哈哈
     <!-- <template #header>
       我这是头部测试的
@@ -332,16 +334,28 @@ const changeRadioValue = (val: string | number | boolean) => {
   >
   </nk-inputNumber> -->
 
-  值为{{ radioValue }}
+  <!-- 值为{{ radioValue }}
   <nk-radio-group v-model="radioValue" @change="changeRadioValue">
     <nk-radio :value="true">111111111 </nk-radio>
     <nk-radio :value="false">2222222222 </nk-radio>
-  </nk-radio-group>
+  </nk-radio-group> -->
+
+
+  <!-- <div>
+    值:{{ rateValue }}
+  </div>
+  <div @click="resetRateValue">
+    重置
+  </div>
+  <nk-rate ref="rateRef" v-model="rateValue" clearable disabled>
+  </nk-rate> -->
+  
 </template>
 <style scoped>
 .scrollbar-flex-content {
   display: flex;
 }
+
 .scrollbar-demo-item {
   flex-shrink: 0;
   display: flex;
