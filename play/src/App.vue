@@ -157,14 +157,12 @@ const changeRadioValue = (val: string | number | boolean) => {
   console.log("变化了", val);
 };
 
-
-
-const rateValue = ref(1)
-const rateRef = ref()
+const rateValue = ref(1);
+const rateRef = ref();
 const resetRateValue = () => {
-  console.log(rateRef)
+  console.log(rateRef);
   rateRef.value?.resetCurrentValue();
-}
+};
 </script>
 
 <template>
@@ -284,8 +282,15 @@ const resetRateValue = () => {
   </nk-calendar> -->
 
   <!-- <nk-button @click="modalShow = true">展开</nk-button> -->
-  <nk-modal v-model="modalShow" :modal="false" width="1000" :close-on-click-modal="false" title="这是标题" @close="close"
-    :show-close="false">
+  <nk-modal
+    v-model="modalShow"
+    :modal="false"
+    width="1000"
+    :close-on-click-modal="false"
+    title="这是标题"
+    @close="close"
+    :show-close="false"
+  >
     哈哈哈哈哈哈
     <!-- <template #header>
       我这是头部测试的
@@ -314,7 +319,7 @@ const resetRateValue = () => {
     </div>
   </nk-scrollbar> -->
 
-  <!-- 值：{{ selectVal }}
+  值：{{ selectVal }}
   <nk-select style="width: 240px" v-model="selectVal" multiple clearable>
     <nk-option
       :label="'选项' + item"
@@ -323,7 +328,7 @@ const resetRateValue = () => {
       :key="item"
       >选项{{ item }}</nk-option
     >
-  </nk-select> -->
+  </nk-select>
   <!-- 值：{{ inputNumberValue }}
   <nk-inputNumber
     v-model="inputNumberValue"
@@ -340,7 +345,6 @@ const resetRateValue = () => {
     <nk-radio :value="false">2222222222 </nk-radio>
   </nk-radio-group> -->
 
-
   <!-- <div>
     值:{{ rateValue }}
   </div>
@@ -349,7 +353,12 @@ const resetRateValue = () => {
   </div>
   <nk-rate ref="rateRef" v-model="rateValue" clearable disabled>
   </nk-rate> -->
-  
+
+  <nk-slider></nk-slider>
+
+  <nk-tooltip :content="'测试用的东西系休息休息'">
+    <nk-button size="medium" type="danger">测试的</nk-button>
+  </nk-tooltip>
 </template>
 <style scoped>
 .scrollbar-flex-content {

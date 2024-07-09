@@ -7,14 +7,21 @@
         v-show="isShow"
         :style="popperRefStyles"
       >
-        <nk-scrollbar
-          :style="styles"
-          maxHeight="280"
-          tag="ul"
-          :class="bem.e('ul')"
-        >
-          <slot></slot>
-        </nk-scrollbar>
+        <template v-if="isScroll">
+          <nk-scrollbar
+            :style="styles"
+            maxHeight="280"
+            tag="ul"
+            :class="bem.e('ul')"
+          >
+            <slot></slot>
+          </nk-scrollbar>
+        </template>
+        <template v-else>
+          <div :class="bem.e('content')">
+            <slot></slot>
+          </div>
+        </template>
         <div
           :class="[bem.e('arrow'), bem.is('show', showArrowStatus)]"
           :style="arrowStyle"
@@ -30,17 +37,7 @@ defineOptions({
 });
 import { createNamespace } from "@niko/utils/create";
 import { popperProps } from "./popper";
-import {
-  computed,
-  inject,
-  nextTick,
-  onMounted,
-  reactive,
-  ref,
-  watch,
-  watchEffect,
-  watchPostEffect,
-} from "vue";
+import { computed, nextTick, onMounted, reactive, ref } from "vue";
 
 const bem = createNamespace("popper");
 
