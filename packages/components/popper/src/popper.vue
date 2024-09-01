@@ -1,19 +1,9 @@
 <template>
   <Teleport to="#modals">
     <Transition name="nk-popper">
-      <div
-        :class="[bem.b()]"
-        ref="popperRef"
-        v-show="isShow"
-        :style="popperRefStyles"
-      >
+      <div :class="[bem.b()]" ref="popperRef" v-show="isShow" :style="popperRefStyles">
         <template v-if="isScroll">
-          <nk-scrollbar
-            :style="styles"
-            maxHeight="280"
-            tag="ul"
-            :class="bem.e('ul')"
-          >
+          <nk-scrollbar :style="styles" maxHeight="280" tag="ul" :class="bem.e('ul')">
             <slot></slot>
           </nk-scrollbar>
         </template>
@@ -22,10 +12,7 @@
             <slot></slot>
           </div>
         </template>
-        <div
-          :class="[bem.e('arrow'), bem.is('show', showArrowStatus)]"
-          :style="arrowStyle"
-        ></div>
+        <div :class="[bem.e('arrow'), bem.is('show', showArrowStatus)]" :style="arrowStyle"></div>
       </div>
     </Transition>
   </Teleport>
@@ -37,7 +24,10 @@ defineOptions({
 });
 import { createNamespace } from "@niko/utils/create";
 import { popperProps } from "./popper";
-import { computed, nextTick, onMounted, reactive, ref } from "vue";
+import { computed, inject, nextTick, onBeforeUnmount, onDeactivated, onMounted, provide, reactive, ref, watch } from "vue";
+import { POPPER_CONTENT_KEY } from './constants'
+import { updata, test } from "./composables/usePopper";
+import { POPPER_INJECTION_KEY } from "../../tooltip/src/constants";
 
 const bem = createNamespace("popper");
 
@@ -78,31 +68,57 @@ const arrowStyle = computed(() => {
 });
 
 const showArrowStatus = ref(true);
+const resizeObserverRef = ref();
+
+// 如果是toopltip进来的
+const obj = inject(POPPER_INJECTION_KEY);
+// console.log('obj', obj)
+if (obj) {
+  obj.position = posi
+}
+
+provide(POPPER_CONTENT_KEY, {
+  posi,
+  minWidth,
+  resizeObserverRef
+})
 
 nextTick(() => {
-  let width = props.parentDom?.offsetWidth;
-  minWidth.value = width ? width : 0;
-  if (props.parentDom?.offsetWidth) {
+
+  // 判断dom是不是根据body定位的
+  if (props.parentDom?.offsetParent === document.body) {
+    let width = props.parentDom?.offsetWidth;
+    minWidth.value = width ? width : 0;
     posi.left = props.parentDom?.offsetLeft;
     posi.top = props.parentDom?.offsetTop + props.parentDom?.offsetHeight + 10;
+
+    // 创建一个ResizeObserver对象，监听parentDom的大小变化
+    const myObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        // 高度不是时刻发生变化的，不用做节流
+        // 应该只用调整高度
+        posi.top =
+          (props.parentDom as HTMLDivElement).offsetTop +
+          entry.borderBoxSize[0].blockSize +
+          10;
+      });
+    });
+    myObserver.observe(props.parentDom as HTMLElement);
+    resizeObserverRef.value = myObserver;
+  } else {
+    // updata(props.parentDom as HTMLElement, posi, minWidth, resizeObserverRef)
+    updata(props.parentDom as HTMLElement, posi, minWidth, resizeObserverRef)
+
   }
 
-  // 创建一个ResizeObserver对象，监听parentDom的大小变化
-  const myObserver = new ResizeObserver((entries) => {
-    entries.forEach((entry) => {
-      // 高度不是时刻发生变化的，不用做节流
-      // 应该只用调整高度
-      posi.top =
-        (props.parentDom as HTMLDivElement).offsetTop +
-        entry.borderBoxSize[0].blockSize +
-        10;
-    });
-  });
-  myObserver.observe(props.parentDom as Element);
+
 });
 
-onMounted(() => {});
-
+onBeforeUnmount(() => {
+  if (resizeObserverRef.value) {
+    resizeObserverRef.value?.disconnect()
+  }
+})
 defineExpose({
   popperRef,
 });

@@ -15,6 +15,7 @@
     "@niko/components": "workspace:^",
     "@niko/theme-chalk": "workspace:^",
     "@niko/utils": "workspace:^",
+    "@niko/hooks": "workspace:^",
     "@niko/directives": "workspace:^",
     "@vueuse/core": "^10.10.0",
     "async-validator": "^4.2.5",

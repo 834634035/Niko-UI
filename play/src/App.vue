@@ -163,6 +163,8 @@ const resetRateValue = () => {
   console.log(rateRef);
   rateRef.value?.resetCurrentValue();
 };
+
+const sliderModel = ref(0)
 </script>
 
 <template>
@@ -354,11 +356,12 @@ const resetRateValue = () => {
   <nk-rate ref="rateRef" v-model="rateValue" clearable disabled>
   </nk-rate> -->
 
-  <nk-slider></nk-slider>
+  {{ sliderModel }}
+  <nk-slider v-model="sliderModel" showTooltip></nk-slider>
 
-  <nk-tooltip :content="'测试用的东西系休息休息'">
+  <!-- <nk-tooltip :content="'测试用的东西系休息休息'">
     <nk-button size="medium" type="danger">测试的</nk-button>
-  </nk-tooltip>
+  </nk-tooltip> -->
 </template>
 <style scoped>
 .scrollbar-flex-content {

@@ -11,6 +11,7 @@ export const TOOLTIP_INJECTION_KEY: InjectionKey<ElTooltipInjectionContext> =
 export type NkPopperInjectionContext = {
   triggerRef: Ref<HTMLElement | undefined>;
   isEnter: Ref<Boolean>;
+  position: any;
 };
 
 export const POPPER_INJECTION_KEY: InjectionKey<NkPopperInjectionContext> =
