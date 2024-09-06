@@ -24,7 +24,8 @@ import { Radio, RadioGroup } from "@niko/components/radio/index";
 import Rate from "@niko/components/rate/index";
 import Slider from "@niko/components/slider/index";
 import Tooltip from "@niko/components/tooltip/index";
-
+// import Message from "@niko/components/message/index";
+import NkMessage from "@niko/components/message/index";
 
 const app = createApp(App);
 const plugins = [
@@ -50,9 +51,12 @@ const plugins = [
   RadioGroup,
   Rate,
   Slider,
-  Tooltip
+  Tooltip,
+  // Message,
 ];
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用
 });
+app.config.globalProperties.$Message = NkMessage;
+console.log(app,'app')
 app.mount("#app");

@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
-import { reactive, ref, triggerRef } from "vue";
+import { reactive, ref, triggerRef, getCurrentInstance, nextTick } from "vue";
+
 import { TreeOption, Key } from "@niko/components/tree/src/tree";
 import Switcher from "@niko/components/internal-icon/Switcher";
 import { FormInstance } from "@niko/components/form/index";
 import { UploadRawFile } from "@niko/components/upload";
+
+
+import { NkMessage } from '@niko/components'
 
 function createData(level = 4, baseKey = ""): any {
   if (!level) return undefined;
@@ -165,6 +169,33 @@ const resetRateValue = () => {
 };
 
 const sliderModel = ref(0)
+
+const proxy = getCurrentInstance();
+
+// proxy?.appContext.config.globalProperties.$Message({ content: '这是测试' })
+// console.log(proxy?.appContext?.confi g.globalProperties)
+
+const showMessage = () => {
+  proxy?.appContext.config.globalProperties.$Message({ content: '这是测试' })
+  // proxy?.appContext.config.globalProperties.$Message.success({ content: '成功了' })
+
+  // nextTick(()=>{
+  //   proxy?.appContext.config.globalProperties.$Message.success({ content: 'nextTick异步成功了' })
+  // })
+  // setTimeout(()=>{
+  //   proxy?.appContext.config.globalProperties.$Message.success({ content: 'setTimeout异步成功了' })
+  // })
+
+  // for(let i = 0 ; i<100000000;i++){
+
+  // }
+
+  proxy?.appContext.config.globalProperties.$Message.success({ content: '同步222222222222222222222222222222222测试' })
+  proxy?.appContext.config.globalProperties.$Message.warning({ content: '2222222222222222222' })
+  proxy?.appContext.config.globalProperties.$Message.error({ content: '同步222111111测试' })
+  proxy?.appContext.config.globalProperties.$Message.info({ content: '同步1111测试',showClose:true })
+
+}
 </script>
 
 <template>
@@ -284,15 +315,8 @@ const sliderModel = ref(0)
   </nk-calendar> -->
 
   <!-- <nk-button @click="modalShow = true">展开</nk-button> -->
-  <nk-modal
-    v-model="modalShow"
-    :modal="false"
-    width="1000"
-    :close-on-click-modal="false"
-    title="这是标题"
-    @close="close"
-    :show-close="false"
-  >
+  <nk-modal v-model="modalShow" :modal="false" width="1000" :close-on-click-modal="false" title="这是标题" @close="close"
+    :show-close="false">
     哈哈哈哈哈哈
     <!-- <template #header>
       我这是头部测试的
@@ -323,13 +347,7 @@ const sliderModel = ref(0)
 
   值：{{ selectVal }}
   <nk-select style="width: 240px" v-model="selectVal" multiple clearable>
-    <nk-option
-      :label="'选项' + item"
-      :value="item.toString()"
-      v-for="item in 10"
-      :key="item"
-      >选项{{ item }}</nk-option
-    >
+    <nk-option :label="'选项' + item" :value="item.toString()" v-for="item in 10" :key="item">选项{{ item }}</nk-option>
   </nk-select>
   <!-- 值：{{ inputNumberValue }}
   <nk-inputNumber
@@ -362,6 +380,10 @@ const sliderModel = ref(0)
   <!-- <nk-tooltip :content="'测试用的东西系休息休息'">
     <nk-button size="medium" type="danger">测试的</nk-button>
   </nk-tooltip> -->
+
+  <!-- <nk-message></nk-message> -->
+
+  <nk-button @click="showMessage">测试信息组件</nk-button>
 </template>
 <style scoped>
 .scrollbar-flex-content {

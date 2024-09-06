@@ -15,6 +15,9 @@
     height: 1em;
     width: 1em;
     vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    line-height: 1em;
     svg.loading{
         animation: loading 1s linear infinite;
     }
