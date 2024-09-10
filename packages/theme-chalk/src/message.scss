@@ -21,23 +21,23 @@
     font-size: 14px;
   }
   @include e(info) {
-    border: 1px solid rgba($color-info, 0.2);
-    background-color: rgba($color-info, 0.15);
+    border: 1px solid $color-info-light-8;
+    background-color: $color-info-light-9;
     color: rgba($color-info, 0.9);
   }
   @include e(success) {
-    border: 1px solid rgba($color-success, 0.2);
-    background-color: rgba($color-success, 0.15);
+    border: 1px solid $color-success-light-8;
+    background-color: $color-success-light-9;
     color: rgba($color-success, 0.9);
   }
   @include e(warning) {
-    border: 1px solid rgba($color-warning, 0.2);
-    background-color: rgba($color-warning, 0.15);
+    border: 1px solid $color-warning-light-8;
+    background-color: $color-warning-light-9;
     color: rgba($color-warning, 0.9);
   }
   @include e(error) {
-    border: 1px solid rgba($color-danger, 0.2);
-    background-color: rgba($color-danger, 0.15);
+    border: 1px solid $color-danger-light-8;
+    background-color: $color-danger-light-9;
     color: rgba($color-danger, 0.9);
   }
   @include e(content) {
