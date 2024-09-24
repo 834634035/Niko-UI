@@ -26,6 +26,7 @@ import Slider from "@niko/components/slider/index";
 import Tooltip from "@niko/components/tooltip/index";
 // import Message from "@niko/components/message/index";
 import NkMessage from "@niko/components/message/index";
+import Alert from "@niko/components/alert/index";
 
 const app = createApp(App);
 const plugins = [
@@ -53,6 +54,7 @@ const plugins = [
   Slider,
   Tooltip,
   // Message,
+  Alert,
 ];
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用

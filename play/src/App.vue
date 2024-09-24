@@ -193,7 +193,7 @@ const showMessage = () => {
   proxy?.appContext.config.globalProperties.$Message.success({ content: '同步222222222222222222222222222222222测试' })
   proxy?.appContext.config.globalProperties.$Message.warning({ content: '2222222222222222222' })
   proxy?.appContext.config.globalProperties.$Message.error({ content: '同步222111111测试' })
-  proxy?.appContext.config.globalProperties.$Message.info({ content: '同步1111测试',showClose:true })
+  proxy?.appContext.config.globalProperties.$Message.info({ content: '同步1111测试', showClose: true })
 
 }
 </script>
@@ -384,6 +384,12 @@ const showMessage = () => {
   <!-- <nk-message></nk-message> -->
 
   <nk-button @click="showMessage">测试信息组件</nk-button>
+
+
+  <nk-alert title="这是测试内容" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
+  <nk-alert title="这是测试内容" type="success" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
+  <nk-alert title="这是测试内容" type="error" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
+  <nk-alert title="这是测试内容" type="warning" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
 </template>
 <style scoped>
 .scrollbar-flex-content {
