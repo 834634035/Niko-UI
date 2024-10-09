@@ -232,7 +232,7 @@ const showMessage = () => {
     节点2
   </nk-checkbox> -->
 
-  <!-- <nk-button
+  <nk-button
     size="medium"
     type="danger"
     :round="true"
@@ -245,7 +245,31 @@ const showMessage = () => {
         <Switcher></Switcher>
       </nk-icon>
     </template>
-  </nk-button> -->
+  </nk-button>
+  <nk-button
+    size="medium"
+    type="primary"
+  >
+    测试
+  </nk-button>
+  <nk-button
+    size="medium"
+    type="success"
+  >
+    测试
+  </nk-button>
+  <nk-button
+    size="medium"
+    type="warning"
+  >
+    测试
+  </nk-button>
+  <nk-button
+    size="medium"
+    type="danger"
+  >
+    测试
+  </nk-button>
 
   <!-- <nk-input
     v-model="inputValue"
@@ -314,7 +338,7 @@ const showMessage = () => {
     </template>
   </nk-calendar> -->
 
-  <!-- <nk-button @click="modalShow = true">展开</nk-button> -->
+  <nk-button @click="modalShow = true">展开</nk-button>
   <nk-modal v-model="modalShow" :modal="false" width="1000" :close-on-click-modal="false" title="这是标题" @close="close"
     :show-close="false">
     哈哈哈哈哈哈
@@ -345,10 +369,10 @@ const showMessage = () => {
     </div>
   </nk-scrollbar> -->
 
-  值：{{ selectVal }}
+  <!-- 值：{{ selectVal }}
   <nk-select style="width: 240px" v-model="selectVal" multiple clearable>
     <nk-option :label="'选项' + item" :value="item.toString()" v-for="item in 10" :key="item">选项{{ item }}</nk-option>
-  </nk-select>
+  </nk-select> -->
   <!-- 值：{{ inputNumberValue }}
   <nk-inputNumber
     v-model="inputNumberValue"
@@ -374,8 +398,8 @@ const showMessage = () => {
   <nk-rate ref="rateRef" v-model="rateValue" clearable disabled>
   </nk-rate> -->
 
-  {{ sliderModel }}
-  <nk-slider v-model="sliderModel" showTooltip></nk-slider>
+  <!-- {{ sliderModel }}
+  <nk-slider v-model="sliderModel" showTooltip></nk-slider> -->
 
   <!-- <nk-tooltip :content="'测试用的东西系休息休息'">
     <nk-button size="medium" type="danger">测试的</nk-button>

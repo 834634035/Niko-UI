@@ -53,20 +53,29 @@
 
   @include m(primary) {
     @include button-variant($color-white, $color-primary, $color-primary);
+    &:hover {
+      @include button-variant($color-white, $color-primary-light-6, $color-primary-light-6);
+    }
   }
 
   @include m(success) {
     @include button-variant($color-white, $color-success, $color-success);
+    &:hover {
+      @include button-variant($color-white, $color-success-light-6, $color-success-light-6);
+    }
   }
 
   @include m(warning) {
     @include button-variant($color-white, $color-warning, $color-warning);
+    &:hover {
+      @include button-variant($color-white, $color-warning-light-6, $color-warning-light-6);
+    }
   }
 
   @include m(danger) {
     @include button-variant($color-white, $color-danger, $color-danger);
+    &:hover {
+      @include button-variant($color-white, $color-danger-light-6, $color-danger-light-6);
+    }
   }
-}
-.nk-button+.nk-button{
-  margin-left: 12px;
 }

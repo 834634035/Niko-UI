@@ -2,6 +2,7 @@
 @use "common/var.scss" as *;
 
 @include b(modal) {
+  display: inline-block;
   position: relative;
   z-index: 1000;
   @include when(hidden) {
