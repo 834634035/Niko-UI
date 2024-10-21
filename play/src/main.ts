@@ -27,6 +27,7 @@ import Tooltip from "@niko/components/tooltip/index";
 // import Message from "@niko/components/message/index";
 import NkMessage from "@niko/components/message/index";
 import Alert from "@niko/components/alert/index";
+import Drawer from "@niko/components/drawer/index";
 
 const app = createApp(App);
 const plugins = [
@@ -55,6 +56,7 @@ const plugins = [
   Tooltip,
   // Message,
   Alert,
+  Drawer,
 ];
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用

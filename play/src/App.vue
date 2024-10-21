@@ -148,6 +148,7 @@ const handleBuforeUpload = (file: UploadRawFile) => {
 const modalShow = ref(false);
 const close = () => {
   modalShow.value = false;
+  drawerShow.value = false;
   console.log("关闭");
 };
 
@@ -196,6 +197,10 @@ const showMessage = () => {
   proxy?.appContext.config.globalProperties.$Message.info({ content: '同步1111测试', showClose: true })
 
 }
+
+
+
+const drawerShow = ref(false)
 </script>
 
 <template>
@@ -232,13 +237,7 @@ const showMessage = () => {
     节点2
   </nk-checkbox> -->
 
-  <nk-button
-    size="medium"
-    type="danger"
-    :round="true"
-    icon-placement="left"
-    @click="handleClick"
-  >
+  <nk-button size="medium" type="danger" :round="true" icon-placement="left" @click="handleClick">
     按钮
     <template #icon>
       <nk-icon>
@@ -246,28 +245,16 @@ const showMessage = () => {
       </nk-icon>
     </template>
   </nk-button>
-  <nk-button
-    size="medium"
-    type="primary"
-  >
+  <nk-button size="medium" type="primary">
     测试
   </nk-button>
-  <nk-button
-    size="medium"
-    type="success"
-  >
+  <nk-button size="medium" type="success">
     测试
   </nk-button>
-  <nk-button
-    size="medium"
-    type="warning"
-  >
+  <nk-button size="medium" type="warning">
     测试
   </nk-button>
-  <nk-button
-    size="medium"
-    type="danger"
-  >
+  <nk-button size="medium" type="danger">
     测试
   </nk-button>
 
@@ -414,6 +401,74 @@ const showMessage = () => {
   <nk-alert title="这是测试内容" type="success" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
   <nk-alert title="这是测试内容" type="error" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
   <nk-alert title="这是测试内容" type="warning" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
+  <nk-button @click="drawerShow = true">展开抽屉</nk-button>
+  <!-- <nk-drawer v-model="drawerShow" direction="ltr" :modal="false" size="30%" title="这是标题" @close="close" :with-header="false"> -->
+  <nk-drawer v-model="drawerShow" direction="rtl" :modal="false" size="30%" title="这是标题" @close="close" :closeOnClickModal="false">
+    <!-- <nk-drawer v-model="drawerShow" direction="ttb" :modal="true" size="30%" title="这是标题" @close="close"> -->
+      <!-- <nk-drawer v-model="drawerShow" direction="btt" :modal="true" size="30%" title="这是标题" @close="close"> -->
+  
+    <div>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+      <p>1110</p>
+    </div>
+  
+  </nk-drawer>
+
 </template>
 <style scoped>
 .scrollbar-flex-content {
