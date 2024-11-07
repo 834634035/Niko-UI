@@ -18,7 +18,7 @@
   border: #fafafa;
   border-radius: 5px;
   user-select: none;
-  min-height: 40px;
+  min-height: 32px;
   line-height: 1;
   vertical-align: middle;
   padding: 0 20px;
@@ -51,31 +51,64 @@
     border-radius: 20px;
   }
 
+  @include m(default) {
+    border: 1px solid;
+    @include button-variant(
+      $font-color-show,
+      $color-white,
+      $disabled-text-color
+    );
+    &:hover {
+      border: 1px solid;
+      @include button-variant(
+        $color-primary,
+        $color-primary-light-9,
+        $color-primary-light-6
+      );
+    }
+  }
+
   @include m(primary) {
     @include button-variant($color-white, $color-primary, $color-primary);
     &:hover {
-      @include button-variant($color-white, $color-primary-light-6, $color-primary-light-6);
+      @include button-variant(
+        $color-white,
+        $color-primary-light-6,
+        $color-primary-light-6
+      );
     }
   }
 
   @include m(success) {
     @include button-variant($color-white, $color-success, $color-success);
     &:hover {
-      @include button-variant($color-white, $color-success-light-6, $color-success-light-6);
+      @include button-variant(
+        $color-white,
+        $color-success-light-6,
+        $color-success-light-6
+      );
     }
   }
 
   @include m(warning) {
     @include button-variant($color-white, $color-warning, $color-warning);
     &:hover {
-      @include button-variant($color-white, $color-warning-light-6, $color-warning-light-6);
+      @include button-variant(
+        $color-white,
+        $color-warning-light-6,
+        $color-warning-light-6
+      );
     }
   }
 
   @include m(danger) {
     @include button-variant($color-white, $color-danger, $color-danger);
     &:hover {
-      @include button-variant($color-white, $color-danger-light-6, $color-danger-light-6);
+      @include button-variant(
+        $color-white,
+        $color-danger-light-6,
+        $color-danger-light-6
+      );
     }
   }
 }

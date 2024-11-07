@@ -26,6 +26,7 @@ import Slider from "@niko/components/slider/index";
 import Tooltip from "@niko/components/tooltip/index";
 // import Message from "@niko/components/message/index";
 import NkMessage from "@niko/components/message/index";
+import NkMessageBox from "@niko/components/messageBox/index";
 import Alert from "@niko/components/alert/index";
 import Drawer from "@niko/components/drawer/index";
 
@@ -62,5 +63,6 @@ plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用
 });
 app.config.globalProperties.$Message = NkMessage;
+app.config.globalProperties.$MessageBox = NkMessageBox;
 console.log(app,'app')
 app.mount("#app");

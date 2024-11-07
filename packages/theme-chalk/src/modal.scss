@@ -16,7 +16,7 @@
     left: 0;
     right: 0;
     overflow: auto;
-    @include when(modal){
+    @include when(modalShow){
       background: rgba($color: #000000, $alpha: 0.5);
     }
   }
