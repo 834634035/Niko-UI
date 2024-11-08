@@ -1,7 +1,7 @@
 {
-  "name": "vue3-component",
+  "name": "nikoui",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "description": "",
   "main": "index.js",
   "scripts": {
