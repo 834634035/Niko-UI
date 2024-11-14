@@ -1,50 +1,46 @@
 <template>
-  <div :class="[bem.b(), bem.is('hidden', !props.modelValue)]" ref="modalRef">
-    <div
-      :class="[bem.e('overlay'), bem.is('modalShow', props.modal)]"
-      @click="overlayClick"
-      ref="overlayRef"
-    >
-      <div :class="bem.e('main')" :style="modelStyle">
-        <div v-if="$slots.header" :class="bem.e('header')">
-          <slot name="header"></slot>
-        </div>
-        <div v-else :class="bem.e('header')">
-          <span :class="bem.e('title')">
-            {{ props.title }}
-          </span>
-
-          <!-- 关闭按钮 -->
-          <div :class="[bem.e('close'), showClose(props.showClose)]" @click="close">
-            <nk-icon :color="'#ccc'" :size="20">
-              <X></X>
-            </nk-icon>
+  <Transition name="nk-model">
+    <div :class="[bem.b()]" v-show="modelValue" ref="modalRef">
+      <div :class="[bem.e('overlay'), bem.is('modalShow', modal)]"  @click="overlayClick"
+        ref="overlayRef">
+        <div :class="bem.e('main')" :style="modelStyle">
+          <div v-if="$slots.header" :class="bem.e('header')">
+            <slot name="header"></slot>
           </div>
-        </div>
+          <div v-else :class="bem.e('header')">
+            <span :class="bem.e('title')">
+              {{ props.title }}
+            </span>
+            <div :class="[bem.e('close'), showClose(props.showClose)]" @click="close">
+              <nk-icon :color="'#ccc'" :size="20">
+                <X></X>
+              </nk-icon>
+            </div>
+          </div>
 
-        <div
-          :class="[bem.e('content'), bem.is('fullscreen', props.fullscreen)]"
-        >
-          <slot></slot>
-        </div>
+          <div :class="[bem.e('content'), bem.is('fullscreen', props.fullscreen)]">
+            <slot></slot>
+          </div>
 
-        <div v-if="$slots.footer" :class="bem.e('footer')">
-          <slot name="footer"></slot>
-        </div>
+          <div v-if="$slots.footer" :class="bem.e('footer')">
+            <slot name="footer"></slot>
+          </div>
 
-        <div v-else :class="bem.e('footer')">
-          <nk-button type="primary" @click="close">确定</nk-button>
-          <nk-button @click="close">取消</nk-button>
+          <div v-else :class="bem.e('footer')">
+            <nk-button type="primary" @click="close">确定</nk-button>
+            <nk-button @click="close">取消</nk-button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </Transition>
+
 </template>
 
 <script setup lang="ts">
 import { createNamespace } from "@niko/utils/create";
 import { ModalProps, ModalEmits } from "./modal";
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import X from "@niko/components/internal-icon/x";
 
 defineOptions({
@@ -74,18 +70,7 @@ const modelStyle = computed(() => {
 
 const modalRef = ref<HTMLInputElement>();
 const overlayRef = ref<HTMLInputElement>();
-// watch(
-//   () => props.modelValue,
-//   () => {
-//     console.log("监控");
-//     if (props.modelValue) {
-//       modalRef.value?.classList;
-//       console.log(modalRef.value?.classList);
-//     }
-//   }
-// );
-
-const showClose = function (value:boolean) {
+const showClose = function (value: boolean) {
   if (!value) {
     return bem.is("show", true);
   } else {

@@ -183,7 +183,7 @@ const showMessage = () => {
   // proxy?.appContext.config.globalProperties.$Message.warning({ content: '2222222222222222222' })
   // proxy?.appContext.config.globalProperties.$Message.error({ content: '同步222111111测试' })
   // proxy?.appContext.config.globalProperties.$Message.info({ content: '同步1111测试', showClose: true })
-  
+
   proxy?.appContext.config.globalProperties.$MessageBox({ message: '测试', showClose: true })
 
 }
@@ -191,6 +191,13 @@ const showMessage = () => {
 
 
 const drawerShow = ref(false)
+
+
+const testShow = ref(false)
+
+setInterval(() => {
+  testShow.value = !testShow.value
+}, 5000)
 </script>
 
 <template>
@@ -393,10 +400,10 @@ const drawerShow = ref(false)
   <nk-alert title="这是测试内容" type="warning" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
   <nk-button @click="drawerShow = true">展开抽屉</nk-button>
   <!-- <nk-drawer v-model="drawerShow" direction="ltr" :modal="false" size="30%" title="这是标题" @close="close" :with-header="false"> -->
-  <nk-drawer v-model="drawerShow" direction="rtl"  size="30%" title="这是标题" @close="close">
+  <nk-drawer v-model="drawerShow" direction="rtl" size="30%" title="这是标题" @close="close">
     <!-- <nk-drawer v-model="drawerShow" direction="ttb" :modal="true" size="30%" title="这是标题" @close="close"> -->
-      <!-- <nk-drawer v-model="drawerShow" direction="btt" :modal="true" size="30%" title="这是标题" @close="close"> -->
-  
+    <!-- <nk-drawer v-model="drawerShow" direction="btt" :modal="true" size="30%" title="这是标题" @close="close"> -->
+
     <div>
       <p>1110</p>
       <p>1110</p>
@@ -456,8 +463,13 @@ const drawerShow = ref(false)
       <p>1110</p>
       <p>1110</p>
     </div>
-  
+
   </nk-drawer>
+
+
+  <Transition name="fade">
+    <span v-show="testShow">测试用的</span>
+  </Transition>
 
 </template>
 <style scoped>
@@ -477,5 +489,16 @@ const drawerShow = ref(false)
   border-radius: 4px;
   background: #e0e;
   color: #cdc;
+}
+</style>
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
