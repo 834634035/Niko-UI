@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
-import { reactive, ref, triggerRef, getCurrentInstance, nextTick } from "vue";
+import { reactive, ref, triggerRef, getCurrentInstance, nextTick, onMounted } from "vue";
 
 import { TreeOption, Key } from "@niko/components/tree/src/tree";
 import Switcher from "@niko/components/internal-icon/Switcher";
@@ -9,6 +9,7 @@ import { UploadRawFile } from "@niko/components/upload";
 
 
 import { NkMessage } from '@niko/components'
+import { ElLoading } from '@niko/directives'
 
 function createData(level = 4, baseKey = ""): any {
   if (!level) return undefined;
@@ -198,6 +199,27 @@ const testShow = ref(false)
 setInterval(() => {
   testShow.value = !testShow.value
 }, 5000)
+
+
+
+let loadingInstance: any = ref()
+onMounted(() => {
+  loadingInstance = ElLoading.service({
+    target: '.test1',
+    fullscreen: false,
+  })
+})
+
+const showLoading = () => {
+  loadingInstance.close();
+
+  loadingInstance = ElLoading.service({
+    target: '.test2',
+    fullscreen: false,
+  })
+}
+
+
 </script>
 
 <template>
@@ -323,7 +345,7 @@ setInterval(() => {
   </nk-calendar> -->
 
   <nk-button @click="modalShow = true">展开</nk-button>
-  <nk-modal v-model="modalShow" width="1000" :close-on-click-modal="false" title="这是标题" @close="close"
+  <nk-modal v-model="modalShow" width="1000" :close-on-click-modal="true" title="这是标题" @close="close"
     :show-close="false">
     哈哈哈哈哈哈
     <!-- <template #header>
@@ -344,14 +366,14 @@ setInterval(() => {
 
   <!-- <nk-link type="danger"> 这是测试链接 </nk-link> -->
 
-  <!-- <nk-scrollbar height="200">
+  <nk-scrollbar height="200">
     <div v-for="item in 20" :key="item" style="height:80px;background-color: aqua;">这是测试{{ item }}</div>
     <div class="scrollbar-flex-content">
       <p v-for="item in 50" :key="item" class="scrollbar-demo-item">
         {{ item }}
       </p>
     </div>
-  </nk-scrollbar> -->
+  </nk-scrollbar>
 
   <!-- 值：{{ selectVal }}
   <nk-select style="width: 240px" v-model="selectVal" multiple clearable>
@@ -382,12 +404,12 @@ setInterval(() => {
   <nk-rate ref="rateRef" v-model="rateValue" clearable disabled>
   </nk-rate> -->
 
-  <!-- {{ sliderModel }}
-  <nk-slider v-model="sliderModel" showTooltip></nk-slider> -->
+  {{ sliderModel }}
+  <nk-slider v-model="sliderModel" showTooltip></nk-slider>
 
-  <!-- <nk-tooltip :content="'测试用的东西系休息休息'">
+  <nk-tooltip :content="'测试用的东西系休息休息'">
     <nk-button size="medium" type="danger">测试的</nk-button>
-  </nk-tooltip> -->
+  </nk-tooltip>
 
   <!-- <nk-message></nk-message> -->
 
@@ -467,9 +489,17 @@ setInterval(() => {
   </nk-drawer>
 
 
-  <Transition name="fade">
+  <!-- <Transition name="fade">
     <span v-show="testShow">测试用的</span>
-  </Transition>
+  </Transition> -->
+  <nk-button @click="showLoading">测试加载状态</nk-button>
+
+  <div class="test1">
+
+  </div>
+  <div class="test2">
+
+  </div>
 
 </template>
 <style scoped>
@@ -489,6 +519,18 @@ setInterval(() => {
   border-radius: 4px;
   background: #e0e;
   color: #cdc;
+}
+
+.test1 {
+  width: 200px;
+  height: 200px;
+  background-color: aquamarine;
+}
+
+.test2 {
+  width: 200px;
+  height: 200px;
+  background-color: rebeccapurple;
 }
 </style>
 <style>

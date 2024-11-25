@@ -4,13 +4,14 @@
 @include b(modal) {
   display: inline-block;
   position: relative;
-  z-index: 1000;
+  z-index: 2000;
   @include when(hidden) {
     display: none;
   }
 
   @include e(overlay) {
     position: fixed;
+    z-index: 2000;
     top: 0;
     bottom: 0;
     left: 0;
@@ -76,7 +77,6 @@
     }
   }
 }
-
 
 .nk-model-enter-from,
 .nk-model-leave-to {
