@@ -24,7 +24,8 @@ function updata(
   dom: HTMLElement,
   posiparams?,
   minWidthparams?: Ref<number>,
-  resizeObserverRefparams?: Ref
+  resizeObserverRefparams?: Ref,
+  mutationObserver?: Ref<MutationObserver | null>
 ) {
   // 自己组件调用
   let posi, minWidth, resizeObserverRef;
@@ -39,11 +40,7 @@ function updata(
     minWidth = obj.minWidth;
     resizeObserverRef = obj.resizeObserverRef;
   }
-  
-  console.log("posi", posi);
-  console.log("minWidth", minWidth);
-  console.log("resizeObserverRef", resizeObserverRef);
-  console.log("调用了吗");
+
   const offsetObj: Position = {
     top: 0,
     left: 0,
@@ -62,6 +59,27 @@ function updata(
   });
   myObserver.observe(dom as HTMLElement);
   resizeObserverRef.value = myObserver;
+
+  if (mutationObserver) {
+    // 监听父元素变化，主要是左右移动，子元素位置随之发生变化
+    mutationObserver.value = new MutationObserver(() => {
+      updateParentDomLeft();
+    });
+    const updateParentDomLeft = () => {
+      if (dom) {
+        const rect = dom.getBoundingClientRect();
+        posi.left = rect.left;
+      } else {
+        posi.left = 0;
+      }
+    };
+    // 监听属性变化
+    mutationObserver.value.observe(dom, {
+      attributes: true,
+      attributeFilter: ["style"], // 如果位置变化是通过 style 属性引起的
+      subtree: true,
+    });
+  }
 }
 
 function test() {
@@ -69,3 +87,6 @@ function test() {
   console.log("POPPER_CONTENT", POPPER_CONTENT);
 }
 export { updata, test };
+function ref(arg0: null): Ref<MutationObserver> {
+  throw new Error("Function not implemented.");
+}

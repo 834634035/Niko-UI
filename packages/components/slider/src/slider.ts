@@ -2,7 +2,7 @@ import { ExtractPropTypes } from "vue";
 
 export const sliderProps = {
   modelValue: {
-    type: String,
+    type: Number,
     default: "",
   },
   disabled: {
@@ -17,18 +17,24 @@ export const sliderProps = {
     type: Number,
     default: 100,
   },
-  step:{
+  step: {
     type: Number,
     default: 1,
   },
-  showTooltip:{
+  showTooltip: {
     type: Boolean,
     default: false,
   },
-  showStops:{
+  showStops: {
     type: Boolean,
     default: false,
-  }
+  },
+};
+
+export const sliderEmits = {
+  "update:modelValue": (val: number) => typeof val === "number",
+  change: (val: number) => typeof val === "number",
+  input: (val: number) => typeof val === "number",
 };
 
 export type SliderProps = ExtractPropTypes<typeof sliderProps>;

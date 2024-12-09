@@ -57,7 +57,7 @@ onMounted(() => {
 
 
     const bj = inject(POPPER_CONTENT_KEY)
-    console.log('bj',bj)
+    // console.log('bj',bj)
     //  如果单击触发器并拖动，说明有可能触发器在移动，那弹出层也需要移动
     triggerRef.value.addEventListener("mousedown", mousedown);
     function mousedown() {

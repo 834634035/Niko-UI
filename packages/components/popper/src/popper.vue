@@ -37,10 +37,9 @@ const popperRef = ref<HTMLDivElement>();
 
 const minWidth = ref(0);
 const styles = computed(() => {
-  let obj = {
+  return {
     minWidth: minWidth.value + "px",
   };
-  return obj;
 });
 
 const posi = reactive({
@@ -49,30 +48,29 @@ const posi = reactive({
 });
 
 const popperRefStyles = computed(() => {
-  let obj = {
+  return {
     position: "absolute",
     left: posi.left + "px",
     top: posi.top + "px",
   };
-  return obj;
 });
 
 // 箭头定位
 const arrowStyle = computed(() => {
-  let obj = {
+  return {
     position: "absolute",
     left: minWidth.value / 2 + "px",
     transform: "translateX(-50%)",
   };
-  return obj;
 });
 
 const showArrowStatus = ref(true);
 const resizeObserverRef = ref();
+const mutationObserver = ref();
 
 // 如果是toopltip进来的
 const obj = inject(POPPER_INJECTION_KEY);
-// console.log('obj', obj)
+
 if (obj) {
   obj.position = posi
 }
@@ -106,8 +104,7 @@ nextTick(() => {
     myObserver.observe(props.parentDom as HTMLElement);
     resizeObserverRef.value = myObserver;
   } else {
-    // updata(props.parentDom as HTMLElement, posi, minWidth, resizeObserverRef)
-    updata(props.parentDom as HTMLElement, posi, minWidth, resizeObserverRef)
+    updata(props.parentDom as HTMLElement, posi, minWidth, resizeObserverRef, mutationObserver)
 
   }
 
@@ -117,6 +114,10 @@ nextTick(() => {
 onBeforeUnmount(() => {
   if (resizeObserverRef.value) {
     resizeObserverRef.value?.disconnect()
+  }
+  if (mutationObserver.value) {
+    mutationObserver.value?.disconnect()
+    mutationObserver.value = null;
   }
 })
 defineExpose({

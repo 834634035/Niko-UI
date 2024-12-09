@@ -422,9 +422,9 @@ const showNotification = () => {
   {{ sliderModel }}
   <nk-slider v-model="sliderModel" showTooltip></nk-slider>
 
-  <nk-tooltip :content="'测试用的东西系休息休息'">
+  <!-- <nk-tooltip :content="'测试用的东西系休息休息'">
     <nk-button size="medium" type="danger">测试的</nk-button>
-  </nk-tooltip>
+  </nk-tooltip> -->
 
   <!-- <nk-message></nk-message> -->
 

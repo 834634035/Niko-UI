@@ -1,6 +1,6 @@
 <template>
   <nk-popper :parentDom="triggerRef" :isShow="visible" :isScroll="false">
-    <div :class="[bem.b()]" v-show="visible" ref="popperRef">
+    <div :class="[bem.b()]" ref="popperRef">
       <slot></slot>
     </div>
   </nk-popper>

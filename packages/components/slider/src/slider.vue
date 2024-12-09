@@ -3,6 +3,7 @@
     <div :class="[bem.e('runway')]" ref="runwayRef">
       <div :class="[bem.e('bar'), bem.is('disabled', disabled)]" :style="barStyle"></div>
       <nk-tooltip :content="content.toString()" v-if="showTooltip">
+        <!-- 哈哈哈 -->
         <div :class="[bem.e('button-box')]" :style="buttonStyle" ref="buttonRef" @mousedown="handleMousedown">
           <div :class="[bem.e('button'), bem.is('disabled', disabled)]">
           </div>
@@ -20,13 +21,15 @@
 <script lang="ts" setup>
 import { createNamespace } from "@niko/utils/create";
 import { computed, nextTick, onMounted, ref, watch } from "vue";
-import { sliderProps } from "./slider";
+import { sliderProps, sliderEmits } from "./slider";
 defineOptions({
   name: "NkSlider",
 });
 
 const bem = createNamespace("slider");
 const props = defineProps(sliderProps);
+
+const emits = defineEmits(sliderEmits)
 
 const runwayRef = ref<HTMLElement | null>(null)
 const buttonRef = ref<HTMLElement | null>(null)
@@ -35,6 +38,7 @@ const width = ref<number>(0)
 const clickX = ref<number>(0); // 鼠标点击时的X位置
 const moveX = ref<number>(0); // 鼠标移动距离
 let currentPercent = 0; // 当前百分比
+const beforeValue = ref<number>(0); // 缓存值，用于触发事件时比较
 
 const content = computed(() => {
   // 需要移动的百分比
@@ -67,8 +71,8 @@ onMounted(() => {
   console.log(buttonRef.value?.offsetLeft)
 })
 
-watch(() => content.value, () => {
-  // console.log('有用吗22222')
+watch(() => content.value, (value) => {
+  // console.log('有用吗22222',value)
   // console.log(buttonRef.value?.offsetLeft)
 })
 
@@ -88,9 +92,9 @@ function handleMousedown(event: MouseEvent) {
   document.onselectstart = function () {
     return false;
   };
-  
-  if(props.disabled){
-    return 
+
+  if (props.disabled) {
+    return
   }
 
   clickX.value = event.pageX;
@@ -100,11 +104,19 @@ function handleMousedown(event: MouseEvent) {
 function handleMousemove(event: MouseEvent) {
   // 鼠标X轴方向的移动距离
   moveX.value = event.pageX - clickX.value;
+
+  if (beforeValue.value !== content.value) {
+    emits('update:modelValue', content.value)
+    emits('input', content.value)
+  }
+  beforeValue.value = content.value
 }
 function handleMouseUp(event: MouseEvent) {
   window.removeEventListener('mousemove', handleMousemove)
   nextTick(() => {
     currentPercent = content.value
+    // console.log('鼠标抬起了', content.value)
+    emits('change', content.value)
     window.removeEventListener('mouseup', handleMouseUp)
   })
 
