@@ -29,6 +29,7 @@ import NkMessage from "@niko/components/message/index";
 import NkMessageBox from "@niko/components/messageBox/index";
 import Alert from "@niko/components/alert/index";
 import Drawer from "@niko/components/drawer/index";
+import Notification from "@niko/components/notification/index";
 
 const app = createApp(App);
 const plugins = [
@@ -64,5 +65,6 @@ plugins.forEach((plugin) => {
 });
 app.config.globalProperties.$Message = NkMessage;
 app.config.globalProperties.$MessageBox = NkMessageBox;
+app.config.globalProperties.$Notification = Notification;
 console.log(app,'app')
 app.mount("#app");

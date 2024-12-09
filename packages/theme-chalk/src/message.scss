@@ -2,7 +2,7 @@
 @use "common/var.scss" as *;
 
 @include b(message) {
-  position: absolute;
+  position: fixed;
   top: 140px;
   left: 50%;
   transform: translateX(-50%);

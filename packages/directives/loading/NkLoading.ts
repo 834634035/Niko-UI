@@ -12,7 +12,7 @@ type singletonObj = {
   close: () => boolean;
 };
 
-type ElLoadingType = {
+type NkLoadingType = {
   service: (options: optionsType) => singletonObj;
 };
 
@@ -22,7 +22,7 @@ const singleton: singletonObj = {
 
 let bodyOverflow, divOverflow;
 
-const ElLoading = {
+const NkLoading = {
   service: (options: optionsType) => {
     const {
       target = document.body,
@@ -79,5 +79,5 @@ const ElLoading = {
   },
 };
 
-export { ElLoadingType };
-export default ElLoading;
+export { NkLoadingType };
+export default NkLoading;

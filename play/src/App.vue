@@ -9,7 +9,7 @@ import { UploadRawFile } from "@niko/components/upload";
 
 
 import { NkMessage } from '@niko/components'
-import { ElLoading } from '@niko/directives'
+import { NkLoading } from '@niko/directives'
 
 function createData(level = 4, baseKey = ""): any {
   if (!level) return undefined;
@@ -178,14 +178,14 @@ const proxy = getCurrentInstance();
 // console.log(proxy?.appContext?.confi g.globalProperties)
 
 const showMessage = () => {
-  // proxy?.appContext.config.globalProperties.$Message({ content: '这是测试' })
+  proxy?.appContext.config.globalProperties.$Message({ content: '这是测试' })
 
   // proxy?.appContext.config.globalProperties.$Message.success({ content: '同步222222222222222222222222222222222测试' })
   // proxy?.appContext.config.globalProperties.$Message.warning({ content: '2222222222222222222' })
   // proxy?.appContext.config.globalProperties.$Message.error({ content: '同步222111111测试' })
   // proxy?.appContext.config.globalProperties.$Message.info({ content: '同步1111测试', showClose: true })
 
-  proxy?.appContext.config.globalProperties.$MessageBox({ message: '测试', showClose: true })
+  // proxy?.appContext.config.globalProperties.$MessageBox({ message: '测试', showClose: true })
 
 }
 
@@ -204,7 +204,7 @@ setInterval(() => {
 
 let loadingInstance: any = ref()
 onMounted(() => {
-  loadingInstance = ElLoading.service({
+  loadingInstance = NkLoading.service({
     target: '.test1',
     fullscreen: false,
   })
@@ -213,10 +213,25 @@ onMounted(() => {
 const showLoading = () => {
   loadingInstance.close();
 
-  loadingInstance = ElLoading.service({
+  loadingInstance = NkLoading.service({
     target: '.test2',
     fullscreen: false,
   })
+}
+
+
+let id = 1
+const showNotification = () => {
+  let arr = ['success', 'info', 'warning', 'error']
+  let i = Math.floor(Math.random() * 4)
+  proxy?.appContext.config.globalProperties.$Notification({
+    title: '这是标题' + id,
+    message: '这是消息' + id,
+    type: arr[i],
+    showClose: true,
+    // duration: 0
+  })
+  id++
 }
 
 
@@ -500,6 +515,10 @@ const showLoading = () => {
   <div class="test2">
 
   </div>
+
+
+  <nk-button @click="showNotification">测试通知组件</nk-button>
+
 
 </template>
 <style scoped>
