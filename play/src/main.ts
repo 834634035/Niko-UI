@@ -30,6 +30,7 @@ import NkMessageBox from "@niko/components/messageBox/index";
 import Alert from "@niko/components/alert/index";
 import Drawer from "@niko/components/drawer/index";
 import Notification from "@niko/components/notification/index";
+import Watermark from "@niko/components/watermark/index";
 
 const app = createApp(App);
 const plugins = [
@@ -59,6 +60,7 @@ const plugins = [
   // Message,
   Alert,
   Drawer,
+  Watermark,
 ];
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用

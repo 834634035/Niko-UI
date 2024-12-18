@@ -518,7 +518,12 @@ const showNotification = () => {
 
 
   <nk-button @click="showNotification">测试通知组件</nk-button>
-
+  <nk-watermark :gap="50" :fontSize="20" :zIndex="1000" image="https://element-plus.org/images/element-plus-logo.svg">
+    <div style="height: 900px;width: 900px; background-color: rgba(1, 1, 1, 0.4);">
+      <div style="width: 100px;height: 100px;position: absolute; top:0;left: 0; z-index: 100; background-color: aqua;">
+      </div>
+    </div>
+  </nk-watermark>
 
 </template>
 <style scoped>
