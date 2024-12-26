@@ -31,6 +31,7 @@ import Alert from "@niko/components/alert/index";
 import Drawer from "@niko/components/drawer/index";
 import Notification from "@niko/components/notification/index";
 import Watermark from "@niko/components/watermark/index";
+import BackTop from "@niko/components/backtop/index";
 
 const app = createApp(App);
 const plugins = [
@@ -61,7 +62,12 @@ const plugins = [
   Alert,
   Drawer,
   Watermark,
+  BackTop,
 ];
+
+console.log(Watermark)
+
+console.log(BackTop)
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用
 });
