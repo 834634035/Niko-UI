@@ -526,6 +526,9 @@ const showNotification = () => {
   </nk-watermark>
 
   <nk-backtop></nk-backtop>
+
+
+  <nk-breadcrumb></nk-breadcrumb>
 </template>
 <style scoped>
 .scrollbar-flex-content {

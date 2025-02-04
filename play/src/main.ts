@@ -32,6 +32,7 @@ import Drawer from "@niko/components/drawer/index";
 import Notification from "@niko/components/notification/index";
 import Watermark from "@niko/components/watermark/index";
 import BackTop from "@niko/components/backtop/index";
+import Breadcrumb from "@niko/components/breadcrumb/index";
 
 const app = createApp(App);
 const plugins = [
@@ -63,6 +64,7 @@ const plugins = [
   Drawer,
   Watermark,
   BackTop,
+  Breadcrumb,
 ];
 
 console.log(Watermark)
