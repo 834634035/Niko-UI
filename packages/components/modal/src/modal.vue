@@ -27,7 +27,7 @@
           </div>
 
           <div v-else :class="bem.e('footer')">
-            <nk-button type="primary" @click="close">确定</nk-button>
+            <nk-button type="primary" @click="close" style="margin-right: 15px;">确定</nk-button>
             <nk-button @click="close">取消</nk-button>
           </div>
         </div>

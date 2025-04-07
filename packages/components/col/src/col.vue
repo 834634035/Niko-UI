@@ -1,6 +1,8 @@
 <template>
   <component :is="tag" :class="colKls" :style="style">
-    <slot></slot>
+    <div :class="bem.b()">
+      <slot></slot>
+    </div>
   </component>
 </template>
 <script lang="ts" setup>
@@ -34,6 +36,6 @@ const style = computed(() => {
 const colKls = computed(() => {
   const { offset, span } = props;
 
-  return [bem.b(), bem.m(`offset-${offset}`), bem.m(`span-${span}`)];
+  return [ bem.m(`offset-${offset}`), bem.m(`span-${span}`)];
 });
 </script>

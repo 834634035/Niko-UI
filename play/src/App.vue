@@ -136,6 +136,7 @@ const submit = () => {
   formRef.value?.validate((res, rej) => {
     console.log(res);
     console.log(rej);
+    alert(res)
   });
 };
 
@@ -151,6 +152,7 @@ const close = () => {
   modalShow.value = false;
   drawerShow.value = false;
   console.log("关闭");
+  // alert('关闭')
 };
 
 const selectVal = ref([]);
@@ -238,9 +240,9 @@ const showNotification = () => {
 </script>
 
 <template>
-  <!-- <nk-icon :color="'red'" :size="100">
+  <nk-icon :color="'#ff0'" :size="24">
     <Switcher></Switcher>
-  </nk-icon> -->
+  </nk-icon>
 
   <!-- 传递一个树形结构数据 -->
   <!-- <nk-tree :data="data" label-field="label" key-field="key" children-field="children"
@@ -261,15 +263,12 @@ const showNotification = () => {
     </template>
 </nk-tree> -->
 
-  <!-- <nk-checkbox
-    v-model="check"
-    :disabled="false"
-    :indeterminate="true"
-    :label="'节点'"
-    @change="(e) => console.log(e)"
-  >
+  <div style="margin: 20px;"></div>
+  {{ check }}
+  <nk-checkbox v-model="check" :disabled="false" :label="'节点'" @change="(e) => console.log(e)">
     节点2
-  </nk-checkbox> -->
+  </nk-checkbox>
+  <div style="margin: 20px;"></div>
 
   <nk-button size="medium" type="danger" :round="true" icon-placement="left" @click="handleClick">
     按钮
@@ -291,15 +290,16 @@ const showNotification = () => {
   <nk-button size="medium" type="danger">
     测试
   </nk-button>
+  <div style="margin: 20px;"></div>
 
-  <!-- <nk-input
+  {{ inputValue }}
+  <nk-input
     v-model="inputValue"
     :placeholder="'请输入'"
     @blur="handleBlur"
     @focus="handleFocus"
-    :clearable="true"
   >
-    <template #prepend> 前置 </template>
+    <!-- <template #prepend> 前置 </template>
     <template #prefix>
       <nk-icon>
         <Switcher></Switcher>
@@ -310,10 +310,11 @@ const showNotification = () => {
         <Switcher></Switcher>
       </nk-icon>
     </template>
-    <template #append> 后置 </template>
-  </nk-input> -->
+    <template #append> 后置 </template> -->
+  </nk-input>
+  <div style="margin: 20px;"></div>
 
-  <!-- <nk-form
+  <nk-form
     ref="formRef"
     :model="formData"
     :rules="{
@@ -344,11 +345,13 @@ const showNotification = () => {
       ></nk-input>
     </nk-form-item>
   </nk-form>
-  <nk-button a="1" b="2" size="medium" @click="submit"> 提交 </nk-button> -->
+  <nk-button size="medium" @click="submit"> 提交 </nk-button>
+  <div style="margin: 20px;"></div>
 
-  <!-- <nk-upload :before-upload="handleBuforeUpload" drag>
+  <nk-upload :before-upload="handleBuforeUpload" drag>
     <nk-button>点击上传</nk-button>
-  </nk-upload> -->
+  </nk-upload>
+  <div style="margin: 20px;"></div>
 
   <!-- <nk-calendar v-model="calendarDate">
     <template #date-cell="{ data }">
@@ -359,7 +362,9 @@ const showNotification = () => {
     </template>
   </nk-calendar> -->
 
-  <nk-button @click="modalShow = true">展开</nk-button>
+  <nk-button @click="modalShow = true">展开Modal</nk-button>
+  <div style="margin: 20px;"></div>
+
   <nk-modal v-model="modalShow" width="1000" :close-on-click-modal="true" title="这是标题" @close="close"
     :show-close="false">
     哈哈哈哈哈哈
@@ -371,15 +376,16 @@ const showNotification = () => {
     </template> -->
   </nk-modal>
 
-  <!-- <nk-row :gutter="30">
+  <nk-row :gutter="10">
     <nk-col :span="1">1</nk-col>
     <nk-col :span="2">2</nk-col>
     <nk-col :span="3">3</nk-col>
     <nk-col :span="4">4</nk-col>
     <nk-col :span="5">5</nk-col>
-  </nk-row> -->
+  </nk-row>
 
   <!-- <nk-link type="danger"> 这是测试链接 </nk-link> -->
+  <div style="margin: 20px;"></div>
 
   <nk-scrollbar height="200">
     <div v-for="item in 20" :key="item" style="height:80px;background-color: aqua;">这是测试{{ item }}</div>
@@ -389,12 +395,9 @@ const showNotification = () => {
       </p>
     </div>
   </nk-scrollbar>
+  <div style="margin: 20px;"></div>
 
-  <!-- 值：{{ selectVal }}
-  <nk-select style="width: 240px" v-model="selectVal" multiple clearable>
-    <nk-option :label="'选项' + item" :value="item.toString()" v-for="item in 10" :key="item">选项{{ item }}</nk-option>
-  </nk-select> -->
-  <!-- 值：{{ inputNumberValue }}
+  值：{{ inputNumberValue }}
   <nk-inputNumber
     v-model="inputNumberValue"
     :min="0"
@@ -402,39 +405,54 @@ const showNotification = () => {
     :step="2"
     @change="(e) => console.log(e)"
   >
-  </nk-inputNumber> -->
+  </nk-inputNumber>
+  <div style="margin: 20px;"></div>
+  值：{{ selectVal }}
+  <nk-select style="width: 240px" v-model="selectVal" multiple clearable>
+    <nk-option :label="'选项' + item" :value="item.toString()" v-for="item in 10" :key="item">选项{{ item }}</nk-option>
+  </nk-select>
+  <div style="margin: 20px;"></div>
 
-  <!-- 值为{{ radioValue }}
+
+  值为{{ radioValue }}
   <nk-radio-group v-model="radioValue" @change="changeRadioValue">
     <nk-radio :value="true">111111111 </nk-radio>
     <nk-radio :value="false">2222222222 </nk-radio>
-  </nk-radio-group> -->
+  </nk-radio-group>
+  <div style="margin: 20px;"></div>
 
-  <!-- <div>
-    值:{{ rateValue }}
+  <div>
+   <span style="margin-right: 20px;">值:{{ rateValue }}</span> 
+  <nk-button @click="resetRateValue" size="medium" type="primary">重置</nk-button>
   </div>
-  <div @click="resetRateValue">
-    重置
-  </div>
-  <nk-rate ref="rateRef" v-model="rateValue" clearable disabled>
-  </nk-rate> -->
 
-  {{ sliderModel }}
+  <nk-rate ref="rateRef" v-model="rateValue" clearable>
+  </nk-rate>
+  <div style="margin: 20px;"></div>
+
+  值: {{ sliderModel }}
   <nk-slider v-model="sliderModel" showTooltip></nk-slider>
 
-  <!-- <nk-tooltip :content="'测试用的东西系休息休息'">
+  <nk-tooltip :content="'测试用的东西系休息休息'">
     <nk-button size="medium" type="danger">测试的</nk-button>
-  </nk-tooltip> -->
+  </nk-tooltip>
 
   <!-- <nk-message></nk-message> -->
+  <div style="margin: 20px;"></div>
 
   <nk-button @click="showMessage">测试信息组件</nk-button>
+  <div style="margin: 20px;"></div>
+
+  <nk-button @click="showNotification">测试通知组件</nk-button>
 
 
   <nk-alert title="这是测试内容" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
   <nk-alert title="这是测试内容" type="success" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
   <nk-alert title="这是测试内容" type="error" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
   <nk-alert title="这是测试内容" type="warning" description="这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述这是测试描述"></nk-alert>
+  
+  <div style="margin: 20px;"></div>
+  
   <nk-button @click="drawerShow = true">展开抽屉</nk-button>
   <!-- <nk-drawer v-model="drawerShow" direction="ltr" :modal="false" size="30%" title="这是标题" @close="close" :with-header="false"> -->
   <nk-drawer v-model="drawerShow" direction="rtl" size="30%" title="这是标题" @close="close">
@@ -503,21 +521,18 @@ const showNotification = () => {
 
   </nk-drawer>
 
+  <div style="margin: 20px;"></div>
 
-  <!-- <Transition name="fade">
+  <Transition name="fade">
     <span v-show="testShow">测试用的</span>
-  </Transition> -->
+  </Transition>
   <nk-button @click="showLoading">测试加载状态</nk-button>
 
-  <div class="test1">
+  <div class="test1"></div>
+  <div class="test2"></div>
 
-  </div>
-  <div class="test2">
+  <div style="margin: 20px;"></div>
 
-  </div>
-
-
-  <nk-button @click="showNotification">测试通知组件</nk-button>
   <nk-watermark :gap="50" :fontSize="20" :zIndex="1000" image="https://element-plus.org/images/element-plus-logo.svg">
     <div style="height: 900px;width: 900px; background-color: rgba(1, 1, 1, 0.4);">
       <div style="width: 100px;height: 100px;position: absolute; top:0;left: 0; z-index: 100; background-color: aqua;">
