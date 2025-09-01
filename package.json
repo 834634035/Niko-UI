@@ -1,7 +1,7 @@
 {
-  "name": "vue3-component",
+  "name": "nikoui",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,14 +13,16 @@
   "license": "ISC",
   "dependencies": {
     "@niko/components": "workspace:^",
+    "@niko/directives": "workspace:^",
+    "@niko/hooks": "workspace:^",
     "@niko/theme-chalk": "workspace:^",
     "@niko/utils": "workspace:^",
-    "@niko/directives": "workspace:^",
     "@vueuse/core": "^10.10.0",
     "async-validator": "^4.2.5",
     "dayjs": "^1.11.10",
     "typescript": "^5.4.3",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.3.1",

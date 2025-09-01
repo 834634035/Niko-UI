@@ -1,4 +1,5 @@
 @use './common/transform.scss';
+@use './common/global.scss';
 
 @use './icon.scss';
 @use './tree.scss';
@@ -17,3 +18,14 @@
 @use './select.scss';
 @use './option.scss';
 @use './popper.scss';
+@use './inputNumber.scss';
+@use './radio.scss';
+@use './rate.scss';
+@use './slider.scss';
+@use './message.scss';
+@use './alert.scss';
+@use './drawer.scss';
+@use './messageBox.scss';
+@use './notification.scss';
+@use './backtop.scss';
+@use 'breadcrumb.scss';

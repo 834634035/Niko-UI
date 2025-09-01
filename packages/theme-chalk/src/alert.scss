@@ -1,0 +1,79 @@
+@use "mixins/mixins.scss" as *;
+@use "common/var.scss" as *;
+
+@include b(alert) {
+  position: relative;
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 4px;
+
+  @include e(dark) {
+    &.nk-alert__success {
+      color: #fff;
+      background-color: $color-success;
+    }
+    &.nk-alert__info {
+      color: #fff;
+      background-color: $color-info;
+    }
+    &.nk-alert__warning {
+      color: #fff;
+      background-color: $color-warning;
+    }
+    &.nk-alert__error {
+      color: #fff;
+      background-color: $color-danger;
+    }
+  }
+
+  @include e(centent) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  @include e(title) {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: left;
+    @include when(center) {
+      text-align: center;
+    }
+  }
+
+  @include e(icon) {
+    position: absolute;
+    right: 16px;
+    top: 12px;
+    cursor: pointer;
+  }
+
+  @include e(description) {
+    text-align: left;
+    font-size: 14px;
+    line-height: 24px;
+    @include when(center) {
+      text-align: center;
+    }
+  }
+
+  @include e(success) {
+    background-color: $color-success-light-9;
+    color: $color-success;
+  }
+
+  @include e(info) {
+    background-color: $color-info-light-9;
+    color: $color-info;
+  }
+
+  @include e(warning) {
+    background-color: $color-warning-light-9;
+    color: $color-warning;
+  }
+
+  @include e(error) {
+    background-color: $color-danger-light-9;
+    color: $color-danger;
+  }
+}

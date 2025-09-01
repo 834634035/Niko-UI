@@ -1,0 +1,122 @@
+@use "mixins/mixins.scss" as *;
+@use "common/var.scss" as *;
+
+$directions: rtl, ltr, ttb, btt;
+
+@include b(drawer) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+  @include when(hide) {
+    display: none;
+  }
+
+  @include e(content) {
+    position: absolute;
+    background-color: $color-white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 16px 48px 16px rgba(0, 0, 0, 0.08),
+      0px 12px 32px rgba(0, 0, 0, 0.12), 0px 8px 16px -8px rgba(0, 0, 0, 0.16);
+  }
+
+  @include e(header) {
+    position: relative;
+    box-sizing: border-box;
+    padding: 20px;
+    padding-bottom: 0;
+    text-align: left;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  @include e(title) {
+    width: calc(100% - 40px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @include e(close) {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+
+  @include e(body) {
+    flex: 1;
+    width: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+
+  .rtl {
+    top: 0;
+    right: 0;
+    height: 100%;
+    transform: translate(0, 0);
+  }
+  .ltr {
+    top: 0;
+    left: 0;
+    height: 100%;
+    transform: translate(0, 0);
+  }
+  .ttb {
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate(0, 0);
+  }
+  .btt {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform: translate(0, 0);
+  }
+}
+
+@each $direction in $directions {
+  .#{$namespace}-drawer-fade {
+    &-#{$direction}-enter-from,
+    &-#{$direction}-leave-to {
+      overflow: hidden !important;
+      opacity: 0;
+
+      .#{$direction} {
+        @if $direction == rtl {
+          transform: translateX(100%);
+        }
+        @if $direction == ltr {
+          transform: translateX(-100%);
+        }
+        @if $direction == ttb {
+          transform: translateY(-100%);
+        }
+        @if $direction == btt {
+          transform: translatey(100%);
+        }
+      }
+    }
+
+    &-#{$direction}-enter-to,
+    &-#{$direction}-leave-from {
+      overflow: hidden !important;
+    }
+
+    &-#{$direction}-enter-active,
+    &-#{$direction}-leave-active {
+      transition: opacity 0.4s ease;
+      .#{$direction} {
+        transition: transform 0.4s ease;
+      }
+    }
+  }
+}

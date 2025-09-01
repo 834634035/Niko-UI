@@ -2,20 +2,22 @@
 @use "common/var.scss" as *;
 
 @include b(modal) {
+  display: inline-block;
   position: relative;
-  z-index: 1000;
+  z-index: 2000;
   @include when(hidden) {
     display: none;
   }
 
   @include e(overlay) {
     position: fixed;
+    z-index: 2000;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     overflow: auto;
-    @include when(modal){
+    @include when(modalShow) {
       background: rgba($color: #000000, $alpha: 0.5);
     }
   }
@@ -27,7 +29,8 @@
     box-sizing: border-box;
     padding: 20px;
     position: relative;
-    box-shadow: 0px 12px 32px 4px rgba(0,0,0,0.04),0px 8px 20px rgba(0,0,0,0.08);
+    box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04),
+      0px 8px 20px rgba(0, 0, 0, 0.08);
   }
 
   @include e(header) {
@@ -51,7 +54,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    @include when(show){
+    @include when(show) {
       display: none;
     }
   }
@@ -73,4 +76,14 @@
       height: calc(100% - 60px - 60px);
     }
   }
+}
+
+.nk-model-enter-from,
+.nk-model-leave-to {
+  opacity: 0;
+}
+
+.nk-model-enter-active,
+.nk-model-leave-active {
+  transition: opacity 0.3s ease;
 }

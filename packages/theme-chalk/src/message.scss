@@ -1,0 +1,58 @@
+@use "mixins/mixins.scss" as *;
+@use "common/var.scss" as *;
+
+@include b(message) {
+  position: fixed;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
+  background: #ccc;
+  padding: 6px 10px 6px 10px;
+  transition: opacity 0.4s, transform 0.4s, top 0.4s;
+  display: flex;
+  align-items: center;
+  @include e(title) {
+    height: 50px;
+    line-height: 50px;
+  }
+
+  @include e(content) {
+    font-size: 14px;
+  }
+  @include e(info) {
+    border: 1px solid $color-info-light-8;
+    background-color: $color-info-light-9;
+    color: rgba($color-info, 0.9);
+  }
+  @include e(success) {
+    border: 1px solid $color-success-light-8;
+    background-color: $color-success-light-9;
+    color: rgba($color-success, 0.9);
+  }
+  @include e(warning) {
+    border: 1px solid $color-warning-light-8;
+    background-color: $color-warning-light-9;
+    color: rgba($color-warning, 0.9);
+  }
+  @include e(error) {
+    border: 1px solid $color-danger-light-8;
+    background-color: $color-danger-light-9;
+    color: rgba($color-danger, 0.9);
+  }
+  @include e(content) {
+    font-size: 14px;
+  }
+
+  @include e(close) {
+    margin-left: 10px;
+    cursor: pointer;
+    color: #919191;
+  }
+}
+
+.#{$namespace}-fade-enter-from,
+.#{$namespace}-fade-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}

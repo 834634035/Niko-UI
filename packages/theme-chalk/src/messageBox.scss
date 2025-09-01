@@ -1,0 +1,82 @@
+@use "mixins/mixins.scss" as *;
+@use "common/var.scss" as *;
+
+@include b(message-box) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($color: #000000, $alpha: 0.5);
+  text-align: center;
+  z-index: 2000;
+  @include e(model) {
+    display: inline-block;
+    max-width: 400px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    vertical-align: middle;
+  }
+  
+  &::after{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+  }
+
+  @include e(header) {
+    position: relative;
+    width: 100%;
+    padding-right: 20px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  @include e(close) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  @include e(content) {
+    width: 100%;
+    padding: 20px;
+  }
+
+  @include e(footer) {
+    width: 100%;
+    height: 32px;
+    text-align: right;
+  }
+}
+
+.nk-message-box-fade-enter-from,
+.nk-message-box-fade-leave-to {
+  opacity: 0;
+  .fade {
+    transform: translateY(-20px);
+  }
+}
+
+.nk-message-box-fade-leave-from,
+.nk-message-box-fade-enter-to {
+  opacity: 1;
+  .fade {
+    transform: translateY(0);
+  }
+}
+
+.nk-message-box-fade-enter-active,
+.nk-message-box-fade-leave-active {
+  transition: opacity .3s ease;
+  .fade{
+    transition:transform .3s ease;
+  }
+}

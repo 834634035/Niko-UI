@@ -1,10 +1,11 @@
 @use "sass:math";
 @use "mixins/mixins.scss" as *;
+@use "common/var.scss" as *;
 
 @include b(col) {
   box-sizing: border-box;
   border-radius: 4px;
-  background-color: burlywood;
+  background-color: $color-primary;
 }
 
 @for $i from 0 through 24 {

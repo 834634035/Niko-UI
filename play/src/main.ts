@@ -19,6 +19,20 @@ import Scrollbar from "@niko/components/scrollbar/index";
 import Select from "@niko/components/select/index";
 import Option from "@niko/components/option/index";
 import Popper from "@niko/components/popper/index";
+import InputNumber from "@niko/components/inputNumber/index";
+import { Radio, RadioGroup } from "@niko/components/radio/index";
+import Rate from "@niko/components/rate/index";
+import Slider from "@niko/components/slider/index";
+import Tooltip from "@niko/components/tooltip/index";
+// import Message from "@niko/components/message/index";
+import NkMessage from "@niko/components/message/index";
+import NkMessageBox from "@niko/components/messageBox/index";
+import Alert from "@niko/components/alert/index";
+import Drawer from "@niko/components/drawer/index";
+import Notification from "@niko/components/notification/index";
+import Watermark from "@niko/components/watermark/index";
+import BackTop from "@niko/components/backtop/index";
+import Breadcrumb from "@niko/components/breadcrumb/index";
 
 const app = createApp(App);
 const plugins = [
@@ -38,9 +52,29 @@ const plugins = [
   Scrollbar,
   Select,
   Option,
-  Popper
+  Popper,
+  InputNumber,
+  Radio,
+  RadioGroup,
+  Rate,
+  Slider,
+  Tooltip,
+  // Message,
+  Alert,
+  Drawer,
+  Watermark,
+  BackTop,
+  Breadcrumb,
 ];
+
+console.log(Watermark)
+
+console.log(BackTop)
 plugins.forEach((plugin) => {
   app.use(plugin); // 把组件注册成全局组件，可以直接使用
 });
+app.config.globalProperties.$Message = NkMessage;
+app.config.globalProperties.$MessageBox = NkMessageBox;
+app.config.globalProperties.$Notification = Notification;
+console.log(app,'app')
 app.mount("#app");

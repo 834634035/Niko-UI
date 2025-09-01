@@ -11,9 +11,3 @@
 
   transform-origin: center 0%;
 }
-
-.#{$namespace}-popper-enter-from,
-.#{$namespace}-popper-leave-active {
-  opacity: 0;
-  transform: scaleY(0);
-}

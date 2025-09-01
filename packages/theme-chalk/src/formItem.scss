@@ -13,12 +13,18 @@
     }
 
     @include e(content){
+        position: relative;
         display: flex;
         flex: 1;
         flex-wrap: wrap;
+        box-sizing: border-box;
+        padding-bottom: 18px;
     }
 
     @include e(error){
+        position: absolute;
+        left: 0;
+        bottom: 0;
         color: $color-danger;
         font-size: 12px;
     }

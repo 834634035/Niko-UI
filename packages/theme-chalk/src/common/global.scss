@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
+}
+
+// /* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+/* 滑块样式 */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(154, 154, 154, 0.2);
+  border-radius: 10px;
+  &:hover {
+    background-color: rgba(154, 154, 154, 0.4);
+    cursor: pointer;
+  }
+}
+/* 滚动条轨道样式 */
+::-webkit-scrollbar-track {
+  background-color: #fcfcfc;
+  border-radius: 10px;
+}
+
+.nk-loading {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border-right-color: transparent;
+  svg {
+    width: 24px;
+    height: 24px;
+    animation: rotate 1s linear infinite;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
